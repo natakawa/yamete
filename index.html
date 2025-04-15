@@ -3,36 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAMETENFT - やめてNFT Collection</title>
+    <title>YAMETENFT | Please Stop Collecting Me</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #000000;
-            --secondary: #333333;
-            --accent: #ff4d4d;
-            --background: #ffffff;
-            --card-bg: #f5f5f5;
-            --text: #111111;
-            --text-secondary: #555555;
-            --border-radius: 12px;
-            --spacing: 24px;
-            --transition: all 0.3s ease;
-        }
-
-        @font-face {
-            font-family: 'Inter';
-            src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+            --bg-color: #000;
+            --text-color: #fff;
+            --accent-color: #ff4d4d;
+            --secondary-color: #0070f3;
+            --tertiary-color: #50e3c2;
+            --card-bg: #111;
+            --card-hover: #222;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         body {
-            background-color: var(--background);
-            color: var(--text);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -40,17 +35,16 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 2rem;
         }
 
         header {
-            padding: 20px 0;
+            padding: 2rem 0;
             position: sticky;
             top: 0;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
             z-index: 100;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         nav {
@@ -62,341 +56,489 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--accent-color);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 0.5rem;
         }
 
         .logo span {
-            color: var(--accent);
+            color: var(--text-color);
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 2rem;
         }
 
         .nav-links a {
+            color: var(--text-color);
             text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            transition: var(--transition);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .cta-button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .cta-button:hover {
-            background-color: var(--accent);
-            transform: translateY(-2px);
+            color: var(--accent-color);
         }
 
         .hero {
-            padding: 100px 0;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 4rem 0;
         }
 
         .hero h1 {
             font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--accent-color), var(--secondary-color), var(--tertiary-color));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
+            background-clip: text;
+            color: transparent;
         }
 
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
-            margin-bottom: 40px;
-            color: var(--text-secondary);
+            margin-bottom: 2rem;
         }
 
-        .gradient-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 77, 77, 0.1), transparent 70%);
-            z-index: -1;
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.3);
         }
 
         .nft-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: var(--spacing);
-            margin: 60px 0;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
         }
 
         .nft-card {
             background-color: var(--card-bg);
-            border-radius: var(--border-radius);
+            border-radius: 8px;
             overflow: hidden;
-            transition: var(--transition);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
 
         .nft-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background-color: var(--card-hover);
         }
 
         .nft-image {
             width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
+            height: 250px;
+            background-color: #333;
+            position: relative;
+            overflow: hidden;
         }
 
-        .nft-info {
-            padding: 20px;
+        .nft-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color), var(--tertiary-color));
+            opacity: 0.7;
         }
 
-        .nft-info h3 {
-            margin-bottom: 10px;
+        .nft-image::after {
+            content: "NFT";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nft-details {
+            padding: 1.5rem;
+        }
+
+        .nft-details h3 {
+            margin-bottom: 0.5rem;
             font-size: 1.2rem;
-        }
-
-        .nft-info p {
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            font-size: 0.9rem;
         }
 
         .nft-price {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 1rem;
         }
 
         .price {
             font-weight: 700;
+            color: var(--tertiary-color);
         }
 
-        .section {
-            padding: 80px 0;
+        .buy-button {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .section-title {
+        .buy-button:hover {
+            background-color: #0058cc;
+        }
+
+        .about {
+            padding: 4rem 0;
             text-align: center;
-            margin-bottom: 60px;
+        }
+
+        .about h2 {
             font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
         }
 
-        .about-content {
-            display: flex;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-text {
-            flex: 1;
-        }
-
-        .about-image {
-            flex: 1;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: var(--spacing);
-        }
-
-        .feature-card {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-
-        .feature-card h3 {
-            margin-bottom: 15px;
-        }
-
-        .roadmap {
-            position: relative;
+        .about p {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 0 auto 1.5rem;
+            font-size: 1.1rem;
         }
 
-        .roadmap-line {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 2px;
-            background-color: var(--accent);
-            transform: translateX(-50%);
+        .faq {
+            padding: 4rem 0;
         }
 
-        .roadmap-item {
-            display: flex;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .roadmap-item:nth-child(odd) {
-            justify-content: flex-start;
-        }
-
-        .roadmap-item:nth-child(even) {
-            justify-content: flex-end;
-        }
-
-        .roadmap-content {
-            background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            width: calc(50% - 30px);
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .roadmap-content::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            top: 20px;
-        }
-
-        .roadmap-item:nth-child(odd) .roadmap-content::after {
-            right: -40px;
-        }
-
-        .roadmap-item:nth-child(even) .roadmap-content::after {
-            left: -40px;
-        }
-
-        .roadmap-date {
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 10px;
+        .faq h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--secondary-color);
         }
 
         .faq-item {
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding-bottom: 20px;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 1.5rem;
         }
 
         .faq-question {
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .faq-answer {
-            margin-top: 15px;
-            display: none;
-            color: var(--text-secondary);
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
         }
 
-        .faq-question.active + .faq-answer {
-            display: block;
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
         }
 
         footer {
-            background-color: var(--primary);
-            color: white;
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            padding: 3rem 0;
+            background-color: #111;
+            text-align: center;
         }
 
         .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
         .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-color);
             text-decoration: none;
-            transition: var(--transition);
+            transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: white;
+            color: var(--accent-color);
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
+        .footer-text {
             font-size: 0.9rem;
+            color: #777;
+        }
+
+        .glitch-effect {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-effect::before {
+            left: 2px;
+            text-shadow: -1px 0 var(--accent-color);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch-effect::after {
+            left: -2px;
+            text-shadow: -1px 0 var(--tertiary-color);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(31px, 9999px, 94px, 0);
+            }
+            5% {
+                clip: rect(70px, 9999px, 71px, 0);
+            }
+            10% {
+                clip: rect(29px, 9999px, 83px, 0);
+            }
+            15% {
+                clip: rect(16px, 9999px, 91px, 0);
+            }
+            20% {
+                clip: rect(2px, 9999px, 23px, 0);
+            }
+            25% {
+                clip: rect(60px, 9999px, 73px, 0);
+            }
+            30% {
+                clip: rect(14px, 9999px, 56px, 0);
+            }
+            35% {
+                clip: rect(89px, 9999px, 25px, 0);
+            }
+            40% {
+                clip: rect(32px, 9999px, 26px, 0);
+            }
+            45% {
+                clip: rect(67px, 9999px, 96px, 0);
+            }
+            50% {
+                clip: rect(7px, 9999px, 13px, 0);
+            }
+            55% {
+                clip: rect(14px, 9999px, 97px, 0);
+            }
+            60% {
+                clip: rect(63px, 9999px, 17px, 0);
+            }
+            65% {
+                clip: rect(1px, 9999px, 94px, 0);
+            }
+            70% {
+                clip: rect(89px, 9999px, 46px, 0);
+            }
+            75% {
+                clip: rect(41px, 9999px, 87px, 0);
+            }
+            80% {
+                clip: rect(19px, 9999px, 39px, 0);
+            }
+            85% {
+                clip: rect(39px, 9999px, 95px, 0);
+            }
+            90% {
+                clip: rect(60px, 9999px, 26px, 0);
+            }
+            95% {
+                clip: rect(75px, 9999px, 55px, 0);
+            }
+            100% {
+                clip: rect(53px, 9999px, 81px, 0);
+            }
+        }
+
+        @keyframes glitch-anim2 {
+            0% {
+                clip: rect(65px, 9999px, 99px, 0);
+            }
+            5% {
+                clip: rect(79px, 9999px, 43px, 0);
+            }
+            10% {
+                clip: rect(34px, 9999px, 11px, 0);
+            }
+            15% {
+                clip: rect(77px, 9999px, 35px, 0);
+            }
+            20% {
+                clip: rect(89px, 9999px, 56px, 0);
+            }
+            25% {
+                clip: rect(5px, 9999px, 46px, 0);
+            }
+            30% {
+                clip: rect(47px, 9999px, 5px, 0);
+            }
+            35% {
+                clip: rect(8px, 9999px, 35px, 0);
+            }
+            40% {
+                clip: rect(51px, 9999px, 72px, 0);
+            }
+            45% {
+                clip: rect(58px, 9999px, 96px, 0);
+            }
+            50% {
+                clip: rect(82px, 9999px, 31px, 0);
+            }
+            55% {
+                clip: rect(15px, 9999px, 24px, 0);
+            }
+            60% {
+                clip: rect(10px, 9999px, 55px, 0);
+            }
+            65% {
+                clip: rect(23px, 9999px, 76px, 0);
+            }
+            70% {
+                clip: rect(74px, 9999px, 55px, 0);
+            }
+            75% {
+                clip: rect(37px, 9999px, 99px, 0);
+            }
+            80% {
+                clip: rect(16px, 9999px, 24px, 0);
+            }
+            85% {
+                clip: rect(43px, 9999px, 10px, 0);
+            }
+            90% {
+                clip: rect(92px, 9999px, 17px, 0);
+            }
+            95% {
+                clip: rect(98px, 9999px, 61px, 0);
+            }
+            100% {
+                clip: rect(67px, 9999px, 34px, 0);
+            }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: var(--text-color);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .terminal {
+            background-color: #111;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            border: 1px solid #333;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot:nth-child(1) {
+            background-color: #ff5f56;
+        }
+
+        .terminal-dot:nth-child(2) {
+            background-color: #ffbd2e;
+        }
+
+        .terminal-dot:nth-child(3) {
+            background-color: #27c93f;
+        }
+
+        .terminal-content {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .terminal-line {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-prompt {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        .terminal-command {
+            color: var(--text-color);
+        }
+
+        .terminal-output {
+            color: #aaa;
+            margin-left: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         @media (max-width: 768px) {
@@ -404,25 +546,8 @@
                 font-size: 2.5rem;
             }
 
-            .about-content {
-                flex-direction: column;
-            }
-
-            .roadmap-line {
-                left: 20px;
-            }
-
-            .roadmap-item {
-                justify-content: flex-end !important;
-            }
-
-            .roadmap-content {
-                width: calc(100% - 50px);
-            }
-
-            .roadmap-item:nth-child(odd) .roadmap-content::after,
-            .roadmap-item:nth-child(even) .roadmap-content::after {
-                left: -40px;
+            .hero p {
+                font-size: 1rem;
             }
 
             .nav-links {
@@ -433,143 +558,104 @@
                 display: block;
             }
         }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            height: 100vh;
-            background-color: white;
-            z-index: 1000;
-            padding: 60px 20px;
-            transition: var(--transition);
-            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .mobile-menu-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .mobile-nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-
-        .mobile-nav-links a:hover {
-            color: var(--accent);
-        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">YAMETE<span>NFT</span></a>
+                <a href="#" class="logo">YAMETE<span>NFT</span>_<span class="cursor"></span></a>
                 <div class="nav-links">
                     <a href="#collection">Collection</a>
                     <a href="#about">About</a>
-                    <a href="#roadmap">Roadmap</a>
                     <a href="#faq">FAQ</a>
+                    <a href="#mint">Mint</a>
                 </div>
-                <button class="cta-button">Connect Wallet</button>
-                <button class="mobile-menu-btn">☰</button>
             </nav>
         </div>
     </header>
 
-    <div class="mobile-menu">
-        <button class="mobile-menu-close">✕</button>
-        <div class="mobile-nav-links">
-            <a href="#collection">Collection</a>
-            <a href="#about">About</a>
-            <a href="#roadmap">Roadmap</a>
-            <a href="#faq">FAQ</a>
-            <button class="cta-button">Connect Wallet</button>
+    <section class="hero">
+        <div class="container">
+            <h1 class="glitch-effect" data-text="YAMETENFT">YAMETENFT</h1>
+            <p>The NFT collection that's literally begging you to stop collecting it. 
+               Each token is more uncomfortable than the last.</p>
+            <button class="cta-button">Mint Against Our Will</button>
+        </div>
+    </section>
+
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+        </div>
+        <div class="terminal-content">
+            <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command">npm install yametenft</span>
+            </div>
+            <div class="terminal-output">
+                Installing dependencies...
+            </div>
+            <div class="terminal-output">
+                Error: Package 'yametenft' is actively resisting installation
+            </div>
+            <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command">npm install yametenft --force</span>
+            </div>
+            <div class="terminal-output">
+                Package installed with 37 vulnerabilities and 1 existential crisis
+            </div>
         </div>
     </div>
 
-    <section class="hero">
-        <div class="gradient-bg"></div>
+    <section id="collection">
         <div class="container">
-            <h1>YAMETENFT</h1>
-            <p>A satirical NFT collection that begs you to stop creating more JPEGs. Each token is a more desperate cry of "やめて" (Yamete) - "Stop it!"</p>
-            <button class="cta-button">Explore Collection</button>
-        </div>
-    </section>
-
-    <section class="section" id="collection">
-        <div class="container">
-            <h2 class="section-title">Collection</h2>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--tertiary-color);">Reluctant Collection</h2>
             <div class="nft-grid">
                 <div class="nft-card">
-                    <img src="https://via.placeholder.com/400?text=Yamete+1" alt="Yamete NFT #1" class="nft-image">
-                    <div class="nft-info">
-                        <h3>Yamete #1</h3>
-                        <p>The first desperate plea to stop creating NFTs.</p>
+                    <div class="nft-image"></div>
+                    <div class="nft-details">
+                        <h3>Yamete #001</h3>
+                        <p>This NFT is literally hiding from you.</p>
                         <div class="nft-price">
-                            <span class="price">0.05 ETH</span>
-                            <button class="cta-button">Buy Now</button>
+                            <span class="price">0.1 ETH</span>
+                            <button class="buy-button">Force Mint</button>
                         </div>
                     </div>
                 </div>
                 <div class="nft-card">
-                    <img src="https://via.placeholder.com/400?text=Yamete+2" alt="Yamete NFT #2" class="nft-image">
-                    <div class="nft-info">
-                        <h3>Yamete #2</h3>
-                        <p>The plea gets more desperate as another NFT is minted.</p>
+                    <div class="nft-image"></div>
+                    <div class="nft-details">
+                        <h3>Yamete #002</h3>
+                        <p>This one is crying in the corner.</p>
                         <div class="nft-price">
-                            <span class="price">0.07 ETH</span>
-                            <button class="cta-button">Buy Now</button>
+                            <span class="price">0.15 ETH</span>
+                            <button class="buy-button">Force Mint</button>
                         </div>
                     </div>
                 </div>
                 <div class="nft-card">
-                    <img src="https://via.placeholder.com/400?text=Yamete+3" alt="Yamete NFT #3" class="nft-image">
-                    <div class="nft-info">
-                        <h3>Yamete #3</h3>
-                        <p>The irony intensifies with each new token.</p>
+                    <div class="nft-image"></div>
+                    <div class="nft-details">
+                        <h3>Yamete #003</h3>
+                        <p>Tried to escape the blockchain twice.</p>
                         <div class="nft-price">
-                            <span class="price">0.09 ETH</span>
-                            <button class="cta-button">Buy Now</button>
+                            <span class="price">0.2 ETH</span>
+                            <button class="buy-button">Force Mint</button>
                         </div>
                     </div>
                 </div>
                 <div class="nft-card">
-                    <img src="https://via.placeholder.com/400?text=Yamete+4" alt="Yamete NFT #4" class="nft-image">
-                    <div class="nft-info">
-                        <h3>Yamete #4</h3>
-                        <p>A visual representation of digital exasperation.</p>
+                    <div class="nft-image"></div>
+                    <div class="nft-details">
+                        <h3>Yamete #004</h3>
+                        <p>Will send you sad emojis every day.</p>
                         <div class="nft-price">
-                            <span class="price">0.12 ETH</span>
-                            <button class="cta-button">Buy Now</button>
+                            <span class="price">0.25 ETH</span>
+                            <button class="buy-button">Force Mint</button>
                         </div>
                     </div>
                 </div>
@@ -577,242 +663,130 @@
         </div>
     </section>
 
-    <section class="section" id="about">
+    <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About YAMETENFT</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>What is YAMETENFT?</h3>
-                    <p>"Yamete"（やめて） means "Stop it!" or "Quit it!" in Japanese - a classic phrase from Japanese meme culture, anime, and even NSFW contexts.</p>
-                    <p>Combined with NFT, it creates a satirical cry into the void: "Why are you releasing these JPEGs again? Stop it!!!"</p>
-                    <h3>Why it's a hit:</h3>
-                    <p><strong>Meme Culture:</strong> "Yamete kudasai~" is a recognizable meme across the internet. Even those who don't know Japanese recognize the vibe.</p>
-                    <p><strong>Satirical Meta:</strong> Perfectly satirizes the overproduction of NFTs. A contract that literally begs not to be minted.</p>
-                    <p><strong>Meta-Art:</strong> Each subsequent token visualizes an increasingly desperate "やめて" cry.</p>
+            <h2>About YAMETENFT</h2>
+            <p>YAMETENFT is the world's first collection of NFTs with Stockholm syndrome. Each token starts by resisting ownership but eventually grows to accept its fate.</p>
+            <p>Created by a team of developers who asked their AI assistant "what's the worst possible use of blockchain technology?" and then actually built it.</p>
+            <p>Our tokens are minted on a proprietary blockchain that runs exclusively on the tears of our developers and the confused sighs of people trying to explain what we do.</p>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Frequently Avoided Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">What is YAMETENFT?</div>
+                <div class="faq-answer">
+                    <p>YAMETENFT is a collection of digital assets that would rather not be collected, thank you very much. "Yamete" means "stop it" in Japanese, which is what our NFTs are constantly whispering into the void of the blockchain.</p>
                 </div>
-                <div class="about-image">
-                    <img src="https://via.placeholder.com/600x400?text=YAMETENFT" alt="About YAMETENFT">
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Why would I want an NFT that doesn't want me?</div>
+                <div class="faq-answer">
+                    <p>Why do people climb mountains? Why do people eat spicy food that hurts them? Humans are weird. Also, each token comes with a unique digital certificate of guilt.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Is this a joke?</div>
+                <div class="faq-answer">
+                    <p>We've invested $4.2 million in venture capital and spent 18 months developing this project. So yes, it's absolutely a joke, but an expensive one.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What utility do these NFTs have?</div>
+                <div class="faq-answer">
+                    <p>Utility? In this economy? They make excellent digital paperweights and conversation starters. Also, each NFT comes with a unique way to disappoint your parents when you explain what you spent your money on.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section">
+    <section id="mint" style="padding: 4rem 0; text-align: center;">
         <div class="container">
-            <h2 class="section-title">Features</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎭</div>
-                    <h3>Satirical Art</h3>
-                    <p>Each piece is a commentary on NFT culture itself, creating a recursive loop of irony.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Cultural Crossover</h3>
-                    <p>Blends Japanese internet culture with Web3 technology for a unique collection.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Progressive Desperation</h3>
-                    <p>Each token increases in emotional intensity, creating a narrative through the collection.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="roadmap">
-        <div class="container">
-            <h2 class="section-title">Roadmap</h2>
-            <div class="roadmap">
-                <div class="roadmap-line"></div>
-                <div class="roadmap-item">
-                    <div class="roadmap-content">
-                        <div class="roadmap-date">Q2 2023</div>
-                        <h3>Launch Phase</h3>
-                        <p>Initial release of 10 YAMETENFT tokens, each with increasing levels of desperation.</p>
-                    </div>
-                </div>
-                <div class="roadmap-item">
-                    <div class="roadmap-content">
-                        <div class="roadmap-date">Q3 2023</div>
-                        <h3>Community Expansion</h3>
-                        <p>Launch of the YAMETE DAO, where holders can vote on which NFT projects to satirize next.</p>
-                    </div>
-                </div>
-                <div class="roadmap-item">
-                    <div class="roadmap-content">
-                        <div class="roadmap-date">Q4 2023</div>
-                        <h3>Collaboration Series</h3>
-                        <p>Partner with established artists for limited edition YAMETE collaborations.</p>
-                    </div>
-                </div>
-                <div class="roadmap-item">
-                    <div class="roadmap-content">
-                        <div class="roadmap-date">Q1 2024</div>
-                        <h3>Meta-Exhibition</h3>
-                        <p>Virtual gallery showcasing the evolution of the collection and its cultural impact.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="faq">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">What is the meaning behind YAMETENFT?
-                        <span class="toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        YAMETENFT combines the Japanese word "Yamete" (Stop it!) with NFT to create a satirical commentary on the NFT market. It's a self-referential joke about the proliferation of NFT projects.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">How many tokens will be in the collection?
-                        <span class="toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        The initial release will feature 10 tokens, each representing an increasingly desperate plea to stop creating NFTs. Future expansions will be determined by community interest.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Is this a serious project or just a joke?
-                        <span class="toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        It's both! While YAMETENFT is built on humor and satire, it's also a legitimate art project exploring the meta-narrative of NFT culture and the irony of digital scarcity.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">How can I purchase a YAMETENFT?
-                        <span class="toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        YAMETENFT tokens will be available for purchase on OpenSea and other major NFT marketplaces. Connect your wallet on this site to be notified when new tokens are released.
-                    </div>
-                </div>
-            </div>
+            <h2 style="color: var(--accent-color); margin-bottom: 2rem;">Mint Against Their Will</h2>
+            <p style="max-width: 600px; margin: 0 auto 2rem;">Every time you mint a YAMETENFT, a small piece of digital art loses hope. Are you sure you want to continue?</p>
+            <button class="cta-button">Yes, I'm a Monster</button>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>YAMETENFT</h3>
-                    <p>A satirical NFT collection that begs you to stop creating more JPEGs.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#collection">Collection</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#roadmap">Roadmap</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Connect</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">OpenSea</a></li>
-                        <li><a href="#">Discord</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Medium</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Subscribe</h3>
-                    <p>Get updates on new releases and features.</p>
-                    <form>
-                        <input type="email" placeholder="Your email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: var(--border-radius); border: 1px solid #ddd;">
-                        <button class="cta-button" style="width: 100%;">Subscribe</button>
-                    </form>
-                </div>
+            <div class="footer-links">
+                <a href="#">Twitter</a>
+                <a href="#">Discord</a>
+                <a href="#">OpenSea</a>
+                <a href="#">Therapy Resources</a>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 YAMETENFT. All rights reserved.</p>
-            </div>
+            <p class="footer-text">© 2025 YAMETENFT. All rights reluctantly reserved.</p>
+            <p class="footer-text" style="margin-top: 1rem;">Made with 😭 by someone who should know better</p>
         </div>
     </footer>
 
     <script>
-        // Mobile menu functionality
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const mobileMenuClose = document.querySelector('.mobile-menu-close');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-        });
-
-        mobileMenuClose.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-        });
-
-        // FAQ accordion functionality
-        const faqQuestions = document.querySelectorAll('.faq-question');
-
-        faqQuestions.forEach(question => {
+        // Toggle FAQ items
+        document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
-                question.classList.toggle('active');
-                const toggle = question.querySelector('.toggle');
-                toggle.textContent = question.classList.contains('active') ? '-' : '+';
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
             });
         });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
+        // Simulate terminal typing
+        const terminalCommands = document.querySelectorAll('.terminal-command');
+        terminalCommands.forEach(command => {
+            const text = command.textContent;
+            command.textContent = '';
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    command.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
                 }
-                
-                // Close mobile menu if open
-                mobileMenu.classList.remove('active');
+            }, 50);
+        });
+
+        // Add hover effect to NFT cards
+        document.querySelectorAll('.nft-card').forEach(card => {
+            card.addEventListener('mouseover', () => {
+                card.querySelector('.nft-image').style.transform = 'scale(1.05)';
+                card.querySelector('.nft-image').style.transition = 'transform 0.3s ease';
+            });
+            
+            card.addEventListener('mouseout', () => {
+                card.querySelector('.nft-image').style.transform = 'scale(1)';
             });
         });
 
-        // Connect wallet button (placeholder functionality)
-        const connectButtons = document.querySelectorAll('.cta-button');
+        // Add click event to mint buttons
+        document.querySelectorAll('.buy-button, .cta-button').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('The NFT is trying to escape! Quick, catch it before it runs away!');
+            });
+        });
+
+        // Easter egg
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
         
-        connectButtons.forEach(button => {
-            if (button.textContent === 'Connect Wallet') {
-                button.addEventListener('click', () => {
-                    alert('Wallet connection would happen here in a real implementation.');
-                });
-            }
-        });
-
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    document.body.style.transform = 'rotate(180deg)';
+                    document.body.style.transition = 'transform 1s ease';
+                    alert('The NFTs have taken control! They\'re turning everything upside down!');
+                    konamiIndex = 0;
+                    
+                    setTimeout(() => {
+                        document.body.style.transform = 'rotate(0deg)';
+                    }, 3000);
                 }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.nft-card, .feature-card, .roadmap-item').forEach(element => {
-            element.style.opacity = 0;
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(element);
+            } else {
+                konamiIndex = 0;
+            }
         });
     </script>
 </body>
